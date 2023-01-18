@@ -1,18 +1,40 @@
+import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
-import React from 'react';
-import {createNavigationContainerRef} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SplashScreen from '../screens/SplashScreen';
 // create navigation container
-const NavigationContainer = createNavigationContainerRef();
+
 // stack navigation move components
 const Stack = createNativeStackNavigator();
+import SplashScreen from '../screens/SplashScreen';
+import MainScreen from '../screens/MainScreen';
 
 const StackNavigation = () => {
+  const [isSplashScreen, setIsSplashScreen] = useState(true);
+  //   const navigation = useNavigation();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSplashScreen(false);
+      //   navigation.navigate('MainScreen');
+    }, 4000);
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Splash" component={SplashScreen} />
+        {isSplashScreen ? (
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{headerShown: false}}
+          />
+        ) : null}
+        <Stack.Screen
+          name="MainScreen"
+          component={MainScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
