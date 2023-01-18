@@ -8,6 +8,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import SplashScreen from '../screens/SplashScreen';
 import MainScreen from '../screens/MainScreen';
+import LoginScreen from '../screens/LoginScreen';
+import AddNumberScreen from '../screens/AddNumberScreen';
+import OtpScreen from '../components/OtpScreen';
+import UserPassword from '../screens/UserPassword';
+import UserDetails from '../screens/UserDetails';
 
 const StackNavigation = () => {
   const [isSplashScreen, setIsSplashScreen] = useState(true);
@@ -33,6 +38,31 @@ const StackNavigation = () => {
         <Stack.Screen
           name="MainScreen"
           component={MainScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddNumberScreen"
+          component={AddNumberScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="OtpScreen"
+          component={OtpScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UserPassword"
+          component={UserPassword}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UserDetails"
+          component={UserDetails}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

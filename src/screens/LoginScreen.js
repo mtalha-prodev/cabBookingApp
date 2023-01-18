@@ -1,10 +1,11 @@
-import {StackActions, useNavigation} from '@react-navigation/native';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-// import {Image} from 'react-native/Libraries/Image/Image';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import Img from './../../assets/images/cab.jpg';
 
-const MainScreen = () => {
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+
+const LoginScreen = () => {
   const navigation = useNavigation();
 
   return (
@@ -14,21 +15,26 @@ const MainScreen = () => {
         <Text>Header</Text>
       </View>
       <View style={style.section}>
-        <Text style={style.text}>
-          Book your RAIDO E- Rickshaw Booking within seconds
+        <Text style={style.text}>Welcome to Quick RAIDO Cab Booking</Text>
+        <Text style={style.textTwo}>
+          The fastest app to book a RAIDO E- rickshaw online near by you{' '}
         </Text>
-        <Text style={style.textTwo}>Explore new ways to travel to Raido</Text>
       </View>
       <View style={style.footer}>
         <TouchableOpacity
           style={style.btn}
           onPress={() =>
-            navigation.dispatch(StackActions.replace('LoginScreen'))
+            navigation.dispatch(StackActions.replace('AddNumberScreen'))
           }>
-          <Text style={style.btnText}>Give me a Ride</Text>
+          <Text style={style.btnText}>Continue With Number</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.btnTwo}>
-          <Text style={style.btnTextTwo}>or ride with RAIDO E-Rickshaw </Text>
+        <TouchableOpacity style={style.btnSnd}>
+          <FontAwesome style={style.fontIcon} name={'facebook'} />
+          <Text style={style.btnText}>login with Facebook</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.btnThird}>
+          <FontAwesome style={style.fontIcon} name={'google'} />
+          <Text style={style.btnText}>login with Gmail</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -43,7 +49,7 @@ const style = StyleSheet.create({
     boxSize: 'border-box',
   },
   header: {
-    flex: 2,
+    flex: 1.7,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -53,7 +59,7 @@ const style = StyleSheet.create({
     borderRadius: 10,
   },
   section: {
-    flex: 1.5,
+    flex: 1,
 
     justifyContent: 'center',
   },
@@ -77,15 +83,31 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
+    marginVertical: 10,
   },
   btnText: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  btnTwo: {
-    marginTop: 20,
-    justifyContent: 'center',
+  btnSnd: {
+    backgroundColor: '#1565B1',
+    padding: 10,
     alignItems: 'center',
+    borderRadius: 25,
+    marginVertical: 10,
+    flexDirection: 'row',
+  },
+  fontIcon: {
+    fontSize: 25,
+    marginHorizontal: 10,
+  },
+  btnThird: {
+    backgroundColor: '#FB5C1C',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 25,
+    marginVertical: 10,
+    flexDirection: 'row',
   },
   btnTextTwo: {
     color: '#EE1C25',
@@ -93,4 +115,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default LoginScreen;
