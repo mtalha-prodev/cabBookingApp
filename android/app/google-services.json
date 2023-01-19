@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "40820079761",
+    "project_id": "cab-booking-app-selfcodex",
+    "storage_bucket": "cab-booking-app-selfcodex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40820079761:android:560809d2995ca0b04c9330",
+        "android_client_info": {
+          "package_name": "com.cabbookingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40820079761-be6epot3ah7mbtvrudj5gs4j0l5nbr9j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cabbookingapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "40820079761-0s94tvh7o9tdhg4lr086060nm0bor3ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyGMYwkxPf5CLX4a_XE0dJstOJY3_heak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40820079761-0s94tvh7o9tdhg4lr086060nm0bor3ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

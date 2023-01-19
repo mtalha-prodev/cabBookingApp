@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">40820079761-0s94tvh7o9tdhg4lr086060nm0bor3ma.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">40820079761</string>
+    <string name="google_api_key" translatable="false">AIzaSyAyGMYwkxPf5CLX4a_XE0dJstOJY3_heak</string>
+    <string name="google_app_id" translatable="false">1:40820079761:android:560809d2995ca0b04c9330</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAyGMYwkxPf5CLX4a_XE0dJstOJY3_heak</string>
+    <string name="google_storage_bucket" translatable="false">cab-booking-app-selfcodex.appspot.com</string>
+    <string name="project_id" translatable="false">cab-booking-app-selfcodex</string>
+</resources>
