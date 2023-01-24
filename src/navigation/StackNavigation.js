@@ -13,6 +13,7 @@ import AddNumberScreen from '../screens/AddNumberScreen';
 import OtpScreen from '../components/OtpScreen';
 import UserPassword from '../screens/UserPassword';
 import UserDetails from '../screens/UserDetails';
+import Test from '../components/Test';
 
 const StackNavigation = () => {
   const [isSplashScreen, setIsSplashScreen] = useState(true);
@@ -35,6 +36,7 @@ const StackNavigation = () => {
             options={{headerShown: false}}
           />
         ) : null}
+        {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen
           name="MainScreen"
           component={MainScreen}
@@ -50,11 +52,11 @@ const StackNavigation = () => {
           component={AddNumberScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="OtpScreen"
           component={OtpScreen}
           options={{headerShown: false}}
-        />
+        /> */}
         <Stack.Screen
           name="UserPassword"
           component={UserPassword}

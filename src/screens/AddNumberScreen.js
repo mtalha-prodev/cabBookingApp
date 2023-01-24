@@ -4,44 +4,100 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const AddNumberScreen = () => {
+  const [sendNumber, setSendNumber] = useState(true);
+  const [userNum, setUserNum] = useState('');
+  const [otpInput, setOtpInput] = useState('');
+  const [confirmNum, setConfirmNum] = useState('');
   const navigation = useNavigation();
   const {navigate} = navigation;
+
+  const sendOtp = async () => {
+    try {
+      const mobile = '+92' + userNum;
+      const response = await auth().signInWithPhoneNumber(mobile);
+      // console.log(response);
+
+      setConfirmNum(response);
+      Alert.alert('Otp Send Successfuly!');
+      setSendNumber(!sendNumber);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const submitOtp = async () => {
+    try {
+      const res = await confirmNum.confirm(otpInput);
+      console.log(res);
+      Alert.alert('Your Number Varify !');
+      navigate('UserPassword');
+      setSendNumber(!sendNumber);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={style.container}>
       <TouchableOpacity
         style={style.backArrow}
-        onPress={() => navigate('LoginScreen')}>
+        onPress={
+          sendNumber
+            ? () => navigate('LoginScreen')
+            : () => navigate('AddNumberScreen')
+        }>
         <FontAwesome style={style.arrowIcon} name={'arrow-left'} />
       </TouchableOpacity>
 
       <View>
-        <Text style={style.title}>Enter your mobile number</Text>
+        <Text style={style.title}>
+          {sendNumber ? 'Enter your mobile number' : 'Enter OTP'}
+        </Text>
         <Text style={style.text}>
-          we will send an otp to this mobile number
+          {sendNumber
+            ? 'we will send an otp to this mobile number'
+            : 'We sent a code to 03XXXXXXXXX'}
         </Text>
       </View>
-      <View style={style.form}>
-        <Text style={style.flag}>Flag</Text>
-        <View style={style.formText}>
-          <Text style={style.inputText}>+92</Text>
-          <TextInput
-            style={style.formInput}
-            placeholder={'03xxxxxxxxx'}
-            placeholderTextColor="#000"
-          />
+      {sendNumber ? (
+        <View style={style.form}>
+          <Text style={style.flag}>Flag</Text>
+          <View style={style.formText}>
+            <Text style={style.inputText}>+92</Text>
+            <TextInput
+              style={style.formInput}
+              placeholder={'03xxxxxxxxx'}
+              placeholderTextColor="#000"
+              onChangeText={val => setUserNum(val)}
+            />
+          </View>
         </View>
-      </View>
+      ) : (
+        <View style={style.form}>
+          <View style={style.formText}>
+            <TextInput
+              style={style.formInput}
+              placeholder={'0000000'}
+              placeholderTextColor="#000"
+              onChangeText={val => setOtpInput(val)}
+            />
+          </View>
+        </View>
+      )}
+
       <View style={style.btnView}>
         <TouchableOpacity
           style={style.nextBtn}
-          onPress={() => navigate('OtpScreen')}>
+          // onPress={() => navigate('OtpScreen')}>
+          onPress={sendNumber ? () => sendOtp() : () => submitOtp()}>
           <Text style={style.btnText}>Next</Text>
         </TouchableOpacity>
       </View>
