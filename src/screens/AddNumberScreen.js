@@ -6,22 +6,24 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 
 const AddNumberScreen = () => {
   const [sendNumber, setSendNumber] = useState(true);
   const [userNum, setUserNum] = useState('');
   const [otpInput, setOtpInput] = useState('');
   const [confirmNum, setConfirmNum] = useState('');
+  const [list, setList] = useState(null);
   const navigation = useNavigation();
   const {navigate} = navigation;
-
+  // user Number
+  const mobile = '+92' + userNum;
   const sendOtp = async () => {
     try {
-      const mobile = '+92' + userNum;
       const response = await auth().signInWithPhoneNumber(mobile);
       // console.log(response);
 
@@ -32,12 +34,36 @@ const AddNumberScreen = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    getUserMobile();
+  }, []);
+
+  const getUserMobile = async () => {
+    try {
+      await database()
+        .ref('userMobile')
+        .on('value', tempData => {
+          setList(tempData.val());
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const submitOtp = async () => {
     try {
+      const index = list.length;
+      console.log(index);
+      // confirm otp
       const res = await confirmNum.confirm(otpInput);
-      console.log(res);
+      console.log(res.user);
       Alert.alert('Your Number Varify !');
+
+      // set number in firestore database
+      await database().ref(`userMobile/${index}`).set({
+        phoneNum: mobile,
+      });
+
       navigate('UserPassword');
       setSendNumber(!sendNumber);
     } catch (error) {

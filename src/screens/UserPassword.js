@@ -4,14 +4,49 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  Alert,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+import database from '@react-native-firebase/database';
 
 const UserPassword = () => {
+  const [userPass, setUserPass] = useState('');
+  const [list, setList] = useState(1);
   const navigation = useNavigation();
   const {navigate} = navigation;
+
+  useEffect(() => {
+    getPass();
+  }, []);
+
+  const getPass = async () => {
+    try {
+      await database()
+        .ref('userData')
+        .on('value', tempData => {
+          setList(tempData.val());
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const setUserPassword = async () => {
+    try {
+      const index = list.length >= 1 ? list.length : 1;
+      console.log(index);
+      const res = await database().ref(`userData/${index}`).set({
+        name: userPass,
+      });
+      Alert.alert('password Create Success!');
+      navigate('UserDetails');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={style.container}>
       <TouchableOpacity
@@ -30,13 +65,14 @@ const UserPassword = () => {
             placeholder={'**********'}
             placeholderTextColor="#000"
             secureTextEntry={true}
+            onChangeText={val => setUserPass(val)}
           />
         </View>
       </View>
       <View style={style.btnView}>
         <TouchableOpacity
           style={style.nextBtn}
-          onPress={() => navigate('UserDetails')}>
+          onPress={() => setUserPassword()}>
           <Text style={style.btnText}>Sign in</Text>
         </TouchableOpacity>
       </View>
