@@ -22,7 +22,7 @@ const StackNavigation = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsSplashScreen(false);
-      //   navigation.navigate('MainScreen');
+        // navigation.navigate('MainScreen');
     }, 4000);
   }, []);
 
